@@ -10,7 +10,5 @@ Package.onUse(function(api) {
   api.versionsFrom('1.1');
   api.use('raix:ui-dropped-event');
   api.addFiles('client/save_file.js', 'client');
-  // api.addFiles('client/state.js', 'client');
-  // api.addFiles('client/images.js', 'client');
   api.addFiles('lib/gifshot.js', 'client');
 });

@@ -1,8 +1,6 @@
 
 Meteor.makeGifFromWebCam = function (state, cb) {
-    debugger;
     gifshot.createGIF(state, function (gif) {
-        debugger;
         if (gif.error) {
             console.log('Error', gif.error)
         } else {

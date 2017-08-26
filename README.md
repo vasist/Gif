@@ -18,7 +18,7 @@ run meteor
 meteor
 ```
 
-## Resources
+## Reference
 1) GifShot  https://yahoo.github.io/gifshot/index.html
 2) React with Meteor  https://www.meteor.com/tutorials/react/creating-an-app
 

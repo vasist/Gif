@@ -3,6 +3,8 @@ import { createContainer } from 'meteor/react-meteor-data';
 import Dropzone from 'react-dropzone'
 import WebCam from './WebCam'
 
+var Loader = require('react-loader');
+
 
 const style = {
     borderWidth: 2,
@@ -26,21 +28,23 @@ const rejectStyle = {
 class App extends Component {
 
 
-    //form submit
+    //form submit. Images to Gif
     handleSubmit(event) {
         event.preventDefault();
-        this.setState({
-            files: [],
-            images: [],
-            interval: .2,
-            showAlert: false
-        });
+        var self = this;
         if (this.state.files.length < 3) {
             this.setState({
                 showAlert: true
             });
             return;
         }
+        this.setState({
+            files: [],
+            images: [],
+            interval: .2,
+            showAlert: false,
+            isloading: true
+        });
         Meteor.makeGifFromImages(this.state, function (result) {
             var $gif = document.getElementById('gif');
             var $download = document.createElement('a');
@@ -56,7 +60,7 @@ class App extends Component {
             newDiv.appendChild($download)
             newDiv.appendChild($gifImg)
             $gif.appendChild(newDiv);
-
+            self.setLoadingoff();
         })
     }
 
@@ -65,13 +69,20 @@ class App extends Component {
         this.state = {
             files: [],
             images: [],
-            interval: .2
+            interval: .2,
+            isloading: false
         };
         this.handleIntervalChange = this.handleIntervalChange.bind(this);
         this.handleWebToGifConversion = this.handleWebToGifConversion.bind(this);
     }
 
+
+    //Webcam to gif
     handleWebToGifConversion(data) {
+        this.setState({
+            isloading: true
+        });
+        var self = this;
         Meteor.makeGifFromWebCam(data, function (result) {
             var $gif = document.getElementById('gif');
             var $download = document.createElement('a');
@@ -87,13 +98,22 @@ class App extends Component {
             newDiv.appendChild($download)
             newDiv.appendChild($gifImg)
             $gif.appendChild(newDiv);
+            self.setLoadingoff();
         })
     }
+
+    setLoadingoff() {
+        this.setState({
+            isloading: false
+        });
+    }
+
 
     handleIntervalChange(event) {
         this.setState({ interval: event.target.value / 1000 });
     }
 
+    //File Drag and Drop
     onDrop(acceptedFiles) {
         this.setState({
             files: acceptedFiles
@@ -112,14 +132,12 @@ class App extends Component {
         })
     }
 
-
+    // Shows the list of files with the file size 
     showFiles() {
         const { files } = this.state;
-
         if (!files.length) {
             return null;
         }
-
         return (
             <div>
                 <h3>Dropped files: </h3>
@@ -142,31 +160,27 @@ class App extends Component {
     render() {
         return (
             <div className="container">
+                <Loader loaded={!this.state.isloading}>
+                </Loader>
                 <form onSubmit={this.handleSubmit.bind(this)}>
-
-                    <div className="alert alert-danger" style={{ display: this.state.showAlert ? 'block' : 'none' }} role="alert">
-                        <strong>Oh snap!</strong>  You need at least three images to generate the gif.
+                    <div className="alert alert-danger" style={{ display: this.state.showAlert ? 'block' : 'none' }}
+                        role="alert">
+                        <strong>Oh snap!</strong> You need at least three images to generate the gif.
                     </div>
-
                     <div className="form-group row">
-
                         <h3>
                             <i className="fa fa-file-image-o" aria-hidden="true"></i> Images to Gif
                         </h3>
-
-
-
                         <Dropzone onDrop={this.onDrop.bind(this)} className="form-control"
                             accept="image/*"
                             style={style}
                             activeStyle={activeStyle}
                             rejectStyle={rejectStyle}
                         >
-                            Select multiple images and drag and drop those images on the box. 
+                            Select multiple images and drag and drop those images on the box.
                         </Dropzone>
                         {this.showFiles()}
                     </div>
-
                     <div className="form-group row">
                         <input className="form-control input-lg"
                             type="text"
@@ -175,7 +189,6 @@ class App extends Component {
                             placeholder="Enter time in milliseconds(defaults to 200ms)"
                         />
                     </div>
-
                     <button className="submitButton form-control btn btn-outline-secondary btn-lg"
                         type="submit"
                         onClick={(e) => this.handleSubmit.bind(this)}>Generate Gif from Images
@@ -184,14 +197,12 @@ class App extends Component {
                 <hr />
                 <div>
                     <WebCam handleWebToGifConversion={this.handleWebToGifConversion} />
-                    {/*<WebCam onUpdate={this.onUpdate} />*/}
                 </div>
                 <hr />
                 <div className="container img-gallery">
                     <div className="row" id="gif">
                     </div>
                 </div>
-
             </div>
         );
     }
