@@ -1,0 +1,17 @@
+{
+  "name": "test-app",
+  "private": true,
+  "scripts": {
+    "start": "meteor run"
+  },
+  "dependencies": {
+    "babel-runtime": "^6.26.0",
+    "classnames": "^2.2.5",
+    "meteor-node-stubs": "^0.2.11",
+    "react": "^15.6.1",
+    "react-addons-pure-render-mixin": "^15.6.0",
+    "react-dom": "^15.6.1",
+    "react-dropzone": "^4.1.0",
+    "react-dropzone-component": "^2.0.0"
+  }
+}
