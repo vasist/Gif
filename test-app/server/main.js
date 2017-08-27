@@ -2,7 +2,7 @@ var fs = Npm.require('fs');
 var path = require('path');
 
 
-//Todo(Dinesh) : Implement a way to upload and fetch the images to S3 bucket.
+//Todo(Dinesh) : Implement a way to upload and fetch the images from S3 bucket.
 Meteor.startup(function () {
     Meteor.methods({
 
