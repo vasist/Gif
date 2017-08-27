@@ -8,7 +8,8 @@ Youtube:
 https://youtu.be/rE4Xh9VziKk
 
 
-![alt text](http://i.imgur.com/NQlwv9C.gifv)
+![alt text](http://i.imgur.com/NQlwv9C.gif)
+![Preview](http://i.imgur.com/NQlwv9C.gif)
 
 
 ## Running the application
