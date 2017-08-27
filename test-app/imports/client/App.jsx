@@ -2,9 +2,7 @@ import React, { Component } from 'react';
 import { createContainer } from 'meteor/react-meteor-data';
 import Dropzone from 'react-dropzone'
 import WebCam from './WebCam'
-
 var Loader = require('react-loader');
-
 
 const style = {
     borderWidth: 2,
@@ -13,21 +11,16 @@ const style = {
     height: 150,
     transition: 'all 0.5s'
 };
-
 const activeStyle = {
     borderStyle: 'solid',
     borderColor: '#4FC47F'
 };
-
 const rejectStyle = {
     borderStyle: 'solid',
     borderColor: '#DD3A0A'
 };
 
-
 class App extends Component {
-
-
     //form submit. Images to Gif
     handleSubmit(event) {
         event.preventDefault();
@@ -76,7 +69,6 @@ class App extends Component {
         this.handleWebToGifConversion = this.handleWebToGifConversion.bind(this);
     }
 
-
     //Webcam to gif
     handleWebToGifConversion(data) {
         this.setState({
@@ -107,7 +99,6 @@ class App extends Component {
             isloading: false
         });
     }
-
 
     handleIntervalChange(event) {
         this.setState({ interval: event.target.value / 1000 });
@@ -207,8 +198,6 @@ class App extends Component {
         );
     }
 }
-
-
 export default createContainer(
     () => {
         return {};
