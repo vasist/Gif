@@ -4,6 +4,10 @@ Gifster (React + Meteor) is a Meteor application for converting images to gif.
 1) Create gif's from images
 2) Create gif's from webcam
 
+Youtube: 
+https://youtu.be/qotOOB4uAPM
+https://youtu.be/rE4Xh9VziKk
+
 ## Running the application
 
 ```
