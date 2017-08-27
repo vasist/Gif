@@ -9,10 +9,6 @@ Gifster (React + Meteor) is a Meteor application for converting images to gif.
 ```
 cd test-app/
 ```
-Install npm package
-```
-npm install
-```
 run meteor 
 ```
 meteor
