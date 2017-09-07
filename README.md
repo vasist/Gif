@@ -25,7 +25,7 @@ meteor
 
 ## Author
 
-Dinesh Vasista. Email : vasydeveloper@gmail.com
+DV. Email : vasydeveloper@gmail.com
 
 ## License
 
